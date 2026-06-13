@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAWNZZN</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      padding-top: 90px;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      font-size: 14px;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 600;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+      transition: color 0.1s;
+    }
+
+    nav a:hover {
+      color: #FF9DCB !important;
+      text-decoration: underline;
+    }
+
+    .navbar-brand img {
+      width: 70px;
+      height: auto;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+    }
+
+    .centered a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .centered a:hover {
+      text-decoration: underline;
+    }
+
+    .custom-nav {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #searchBar {
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(-5px);
+      z-index: 1050;
+    }
+
+    #searchBar.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #searchBar input::placeholder {
+      color: #b4b4b4;
+      letter-spacing: 1px;
+    }
+
+    #searchBar input:focus {
+      outline: none;
+      box-shadow: none;
+      border: none;
+    }
+
+    footer {
+      background-color: white;
+      border-top: 1px solid #ccc;
+      color: black;
+      font-size: 12px;
+      padding: 3rem 1rem;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: black;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .login-wrapper {
+      min-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins", sans-serif;
+      background-color: #ffffff;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      padding: 35px 35px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    }
+
+    .login-card h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    .login-card label {
+      font-weight: 500;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      background-color: #fff0f6;
+      border: 1px solid #ffcce3;
+    }
+
+    .login-btn {
+      background-color: #FF9DCB;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 0;
+      font-weight: 600;
+      color: white;
+      width: 100%;
+      transition: 0.3s;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    .login-card p a {
+      color: #FF9DCB;
+      text-decoration: none;
+    }
+
+    .login-bg {
+      min-height: 100vh;
+      background: #ffffff;
+      padding-top: 120px;
+      /* para hindi tumama sa fixed header */
+    }
+
+    .form-control {
+      background-color: #fff0f6;
+      border: 1px solid #ffcce3;
+      border-radius: 10px;
+    }
+
+    .btn-pink {
+      background-color: #FF9DCB;
+      color: #fff;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .btn-pink:hover {
+      opacity: 0.9;
+    }
+
+    .auth-container {
+      padding-top: 80px;
+      padding-bottom: 80px;
+      min-height: auto;
+    }
+
+    /* Card style */
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 15px;
+      transition: 0.4s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .auth-card h3 {
+      font-family: 'Lexend', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .form-control {
+      background-color: #fff0f6;
+      border: 1px solid #ffcce3;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-pink {
+      background-color: #FF9DCB;
+      color: #fff;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .btn-pink:hover {
+      opacity: 0.9;
+    }
+
+    /* ANIMATION */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: 0.4s ease;
+    }
+
+    .fade-slide.show {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid custom-nav">
+
+        <div class="d-flex align-items-center gap-5">
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown">
+              Shop
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="shop.html">All</a></li>
+              <li><a class="dropdown-item" href="#accessory">Accessories</a></li>
+              <li><a class="dropdown-item" href="#jacket">Jacket</a></li>
+              <li><a class="dropdown-item" href="#shirt">Shirt</a></li>
+            </ul>
+          </div>
+          <a href="index.html" class="nav-link"> Home </a>
+          <a href="#" class="nav-link" id="searchToggle">
+            <i class="bi bi-search"></i> Search
+          </a>
+          <div id="searchBar" class="position-absolute top-100 start-0 w-100 bg-white border-top d-none">
+            <div class="container-fluid px-5 py-2">
+              <form class="d-flex justify-content-between align-items-center">
+                <input type="text" class="form-control border-0 shadow-none" placeholder="SEARCH..."
+                  style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                <i class="bi bi-search"></i>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <a class="navbar-brand mx-auto d-none d-lg-block" href="index.html">
+          <img src="/assets/yjlogo.png" alt="YJ Logo">
+        </a>
+
+        <div class="d-flex align-items-center gap-5">
+          <a href="login.html" class="nav-link">
+            <i class="bi bi-person"></i> Login
+          </a>
+          <a href="#" class="nav-link">
+            <i class="bi bi-bag"></i> Cart
+          </a>
+          <a href="brand.html">About Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="auth-container d-flex justify-content-center align-items-start">
+    <div class="card shadow-sm p-4 auth-card fade-slide show" id="authCard">
+
+      <!-- SIGN IN FORM -->
+      <div id="signInForm">
+        <h3 class="text-center mb-4" style="font-weight:700;">Sign In</h3>
+
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Username or Email</label>
+            <input type="text" class="form-control" placeholder="Enter your username or email">
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <label class="form-label">Password</label>
+              <a href="#" style="color:#FF9DCB; font-size: 14px;">Forgot?</a>
+            </div>
+            <input type="password" class="form-control" placeholder="••••••••">
+          </div>
+
+          <a href="index.html" class="btn btn-pink w-100">SIGN IN →</a>
+        </form>
+
+        <p class="text-center mt-4">
+          <span class="text-muted">I don't have an account?</span>
+          <a href="#" id="toSignUp" style="color:#FF9DCB;">Sign up</a>
+        </p>
+      </div>
+
+      <!-- SIGN UP FORM -->
+      <div id="signUpForm" class="d-none">
+        <h3 class="text-center mb-4" style="font-weight:700;">Sign Up</h3>
+
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" placeholder="">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="emailInput" placeholder="">
+            <small id="emailWarning" class="text-danger d-none">Please enter a valid email address.</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="dobInput" max="">
+            <small class="text-muted">If you are under 18, make sure you have your parent's permission.</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="••••••••">
+          </div>
+
+          <button class="btn btn-pink w-100">CREATE ACCOUNT →</button>
+        </form>
+
+        <p class="text-center mt-4">
+          <span class="text-muted">Already have an account?</span>
+          <a href="#" id="toSignIn" style="color:#FF9DCB;">Sign in</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row gy-4">
+
+        <div class="col-md-8 d-flex flex-wrap gap-5"> <!--left side sa footer-->
+          <div>
+            <h6><strong>About</strong></h6>
+            <p><a href="brand.html">Brand</a></p>
+            <p><a href="#">Contact</a></p>
+          </div>
+          <div>
+            <h6><strong>Account</strong></h6>
+            <p><a href="login.html">Login</a></p>
+            <p><a href="#">Cart</a></p>
+          </div>
+          <div>
+            <h6><strong>Support</strong></h6>
+            <p><a href="#">FAQ</a></p>
+            <p><a href="#">Notice</a></p>
+          </div>
+        </div>
+
+        <div class="col-md-4"> <!--right side sa footer-->
+          <p><a href="#"><u>Privacy Policy</u></a> / <a href="#"><u>Terms and Conditions</u></a> /
+            <a href="#"><u>Shipping & Return</u></a>
+          </p>
+          <p><strong>㈜야운즌</strong> | CEO: <strong>YEONJUN</strong> | Business No: 207-86-03204 |</p>
+          <p>
+          <address>Address: 서울특별시 성동구 왕십리로30-12 </address>
+          </p>
+          <p>official@yawnzzn.com | +82 1551-2504 |</p>
+          <p>© 2024 YAWNZZN. All Rights Reserved. | <a href="https://www.instagram.com/yawnzzn/">Instagram</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const searchToggle = document.getElementById('searchToggle');
+    const searchBar = document.getElementById('searchBar');
+
+    searchToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isHidden = searchBar.classList.contains('d-none');
+      if (isHidden) {
+        searchBar.classList.remove('d-none');
+        setTimeout(() => searchBar.classList.add('show'), 10);
+      } else {
+        searchBar.classList.remove('show');
+        setTimeout(() => searchBar.classList.add('d-none'), 300);
+      }
+    });
+
+    // optional: click outside to close
+    document.addEventListener('click', (e) => {
+      if (!searchBar.contains(e.target) && !searchToggle.contains(e.target)) {
+        searchBar.classList.remove('show');
+        setTimeout(() => searchBar.classList.add('d-none'), 300);
+      }
+    });
+
+    // Simple fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('aos-animate');
+      });
+    });
+    document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+    const card = document.getElementById("authCard");
+    const signInForm = document.getElementById("signInForm");
+    const signUpForm = document.getElementById("signUpForm");
+
+    document.getElementById("toSignUp").addEventListener("click", () => {
+      card.classList.remove("show");        // fade out
+      setTimeout(() => {
+        signInForm.classList.add("d-none");
+        signUpForm.classList.remove("d-none");
+        card.classList.add("show");         // fade in
+      }, 300);
+    });
+
+    document.getElementById("toSignIn").addEventListener("click", () => {
+      card.classList.remove("show");
+      setTimeout(() => {
+        signUpForm.classList.add("d-none");
+        signInForm.classList.remove("d-none");
+        card.classList.add("show");
+      }, 300);
+    });
+
+    const emailInput = document.getElementById("emailInput");
+    const emailWarning = document.getElementById("emailWarning");
+
+    emailInput.addEventListener("input", () => {
+      const emailValue = emailInput.value;
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (emailValue === "") {
+        emailWarning.classList.add("d-none");
+        emailInput.classList.remove("is-invalid");
+      }
+      else if (!validEmail.test(emailValue)) {
+        emailWarning.classList.remove("d-none");
+        emailInput.classList.add("is-invalid");
+      }
+      else {
+        emailWarning.classList.add("d-none");
+        emailInput.classList.remove("is-invalid");
+      }
+    });
+
+    const dobInput = document.getElementById('dobInput');
+    const today = new Date().toISOString().split('T')[0];
+    dobInput.setAttribute('max', today);
+
+
+  </script>
+</body>
+
+</html>

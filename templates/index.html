@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAWNZZN</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      padding-top: 115px;
+      /* header 90px + top-banner 25px */
+    }
+
+    .top-banner {
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      font-size: 14px;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 600;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+      transition: color 0.1s;
+    }
+
+    nav a:hover {
+      color: #FF9DCB !important;
+      text-decoration: underline;
+    }
+
+    .navbar-brand img {
+      width: 70px;
+      height: auto;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+    }
+
+    .centered a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .centered a:hover {
+      text-decoration: underline;
+    }
+
+    .custom-nav {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    .section-title {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #000;
+      text-align: left;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.5px;
+    }
+
+    #searchBar {
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(-5px);
+      z-index: 1050;
+    }
+
+    #searchBar.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #searchBar input::placeholder {
+      color: #b4b4b4;
+      letter-spacing: 1px;
+    }
+
+    #searchBar input:focus {
+      outline: none;
+      box-shadow: none;
+      border: none;
+    }
+
+    #musicToggle {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0);
+      border: none;
+      border-radius: 50%;
+      padding: 10px 12px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    #musicToggle:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+
+    footer {
+      background-color: white;
+      border-top: 1px solid #ccc;
+      color: black;
+      font-size: 12px;
+      padding: 3rem 1rem;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: black;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    video,
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item .hover-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-item:hover .hover-img {
+      opacity: 1;
+    }
+
+    .gallery-item .main-img {
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-item:hover .main-img {
+      opacity: 0;
+    }
+
+    .gallery-item a {
+      display: inline-block;
+      background-color: #f5f2ec;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .review-section {
+      background: #f5f2eb;
+      /* soft beige – matches your images */
+    }
+
+    .review-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .stars {
+      color: #000;
+      letter-spacing: 2px;
+      font-size: 18px;
+    }
+
+    .profile-circle {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .helpful i {
+      cursor: pointer;
+      transition: color .2s ease;
+    }
+
+    .helpful i:hover {
+      color: #FF9DCB;
+    }
+
+    .spotlight-card {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .spotlight-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .spotlight-card img {
+      width: 100%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      transition: transform 0.35s ease;
+    }
+
+    .spotlight-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .spotlight-title {
+      font-weight: 700;
+      margin-top: 15px;
+    }
+
+    .spotlight-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #e6c9a8;
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: 0.3s;
+    }
+
+    .spotlight-btn:hover {
+      background: #d5b897;
+      color: white;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="fixed-top">
+    <div class="top-banner" data-bs-toggle="modal" data-bs-target="#recommendModal" style="cursor:pointer;">
+      Only a few GGUM merch left — Click here to Suggest a Product!
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid custom-nav">
+
+        <div class="d-flex align-items-center gap-5">
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown">
+              Shop
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="shop.html">All</a></li>
+              <li><a class="dropdown-item" href="#accessory">Accessories</a></li>
+              <li><a class="dropdown-item" href="#jacket">Jacket</a></li>
+              <li><a class="dropdown-item" href="#shirt">Shirt</a></li>
+            </ul>
+          </div>
+          <a href="index.html" class="nav-link"> Home </a>
+          <a href="#" class="nav-link" id="searchToggle">
+            <i class="bi bi-search"></i> Search
+          </a>
+          <div id="searchBar" class="position-absolute top-100 start-0 w-100 bg-white border-top d-none">
+            <div class="container-fluid px-5 py-2">
+              <form class="d-flex justify-content-between align-items-center">
+                <input type="text" class="form-control border-0 shadow-none" placeholder="SEARCH..."
+                  style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                <i class="bi bi-search"></i>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <a class="navbar-brand mx-auto d-none d-lg-block" href="index.html">
+          <img src="/assets/yjlogo.png" alt="YJ Logo">
+        </a>
+
+        <div class="d-flex align-items-center gap-5">
+          <a href="login.html" class="nav-link">
+            <i class="bi bi-person"></i> Login
+          </a>
+          <a href="#" class="nav-link">
+            <i class="bi bi-bag"></i> Cart
+          </a>
+          <a href="brand.html">About Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="position-relative">
+    <img src="/assets/ggdeinet.png" alt="GGUM X DEINET">
+    <div class="centered">
+      <h1 class="fw-bold">GGUM X DEINET</h1>
+      <p><a href="shop.html">Shop Now</a> →</p>
+    </div>
+  </section>
+
+  <section class="text-center position-relative">
+    <video id="bgvid" autoplay muted loop>
+      <source src="/assets/yjvid.mp4" type="video/mp4">
+    </video>
+    <button id="musicToggle">🔈</button>
+    <audio id="bgaudio" src="/assets/yjvid.mp3" preload="auto" loop></audio>
+  </section>
+
+  <section class="container my-5">
+    <h2 class="fw-bold mb-4">SPOTLIGHT</h2>
+    <div class="row g-4">
+
+      <!-- ITEM 1 -->
+      <div class="col-md-4">
+        <div class="spotlight-card p-3">
+          <img src="/assets/spotlight1.jpg" alt="">
+          <h4 class="spotlight-title">GGUM HOODIE</h4>
+          <a href="yjhoodie.html" class="spotlight-btn mt-2">SHOP THE COLLECTION</a>
+        </div>
+      </div>
+
+      <!-- ITEM 2 -->
+      <div class="col-md-4">
+        <div class="spotlight-card p-3">
+          <img src="/assets/spotlight2.jpg" alt="">
+          <h4 class="spotlight-title">GGUM FRINGE JACKET</h4>
+          <a href="yjfringejacket.html" class="spotlight-btn mt-2">SHOP THE COLLECTION</a>
+        </div>
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="col-md-4">
+        <div class="spotlight-card p-3">
+          <img src="/assets/spotlight3.jpg" alt="">
+          <h4 class="spotlight-title">GGUM BALLCAPS</h4>
+          <a href="shop.html#accessory" class="spotlight-btn mt-2">SHOP THE COLLECTION</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="container-fluid p-0">
+    <img src="/assets/allggum.jpg" usemap="#image-map" alt="Yawnzzn Products" class="img-fluid w-100">
+    <map name="image-map">
+      <area target="" alt="yj hoodie" title="yj hoodie" href="yjhoodie.html" coords="1093,599,236" shape="circle">
+      <area target="" alt="yj eco bag" title="yj eco bag" href="yjecobag.html" coords="288,691,184" shape="circle">
+      <area target="" alt="yj blue ballcap" title="yj blue ballcap" href="yjcapb2.html" coords="1095,118,121" shape="circle">
+    </map>
+  </section>
+
+  <section class="container my-5">
+    <!-- Section Title -->
+    <div class="mb-4">
+      <h3 class="section-title">6 Products</h3>
+    </div>
+
+    <section class="container my-5">
+      <div class="row g-4">
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="gallery-item text-center">
+            <a href="yjcapb1.html">
+              <img src="/assets/yjblackcap.png" alt="YJ Black Cap" class="img-fluid main-img">
+              <img src="/assets/yjblackcap-zoom.png" alt="YJ Black Cap Alternate" class="img-fluid hover-img">
+            </a>
+            <div class="desc mt-2">
+              <strong>[GGUM X DEINET] BALLCAP IN BLACK</strong><br>
+              ₱1,592.53
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="gallery-item text-center">
+            <a href="yjcapb2.html">
+              <img src="/assets/yjbluecap.png" alt="YJ Blue Cap" class="img-fluid main-img">
+              <img src="/assets/yjbluecap-zoom.png" alt="YJ Blue Cap Alternate" class="img-fluid hover-img">
+            </a>
+            <div class="desc mt-2">
+              <strong>[GGUM X DEINET] BALLCAP IN BLUE</strong><br>
+              ₱1,592.53
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4" id="accessory">
+          <div class="gallery-item text-center">
+            <a href="yjecobag.html">
+              <img src="/assets/yjecobag.png" alt="YJ Eco Bag" class="img-fluid main-img">
+              <img src="/assets/yjecobag-back.png" alt="YJ Eco Bag Alternate" class="img-fluid hover-img">
+            </a>
+            <div class="desc mt-2">
+              <strong>[GGUM X DEINET] BIG ECO BAG IN MULTI</strong><br>
+              ₱2,408.91
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4" id="jacket">
+          <div class="gallery-item text-center">
+            <a href="yjfringejacket.html">
+              <img src="/assets/yjfringe.png" alt="YJ Fringe" class="img-fluid main-img">
+              <img src="/assets/yjfringe-front.png" alt="YJ Fringe Alternate" class="img-fluid hover-img">
+            </a>
+            <div class="desc mt-2">
+              <strong>[GGUM X DEINET] FRINGE JACKET IN BLACK</strong><br>
+              ₱9,986.94
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="gallery-item text-center">
+            <a href="yjhoodie.html">
+              <img src="/assets/yjhoodie.png" alt="YJ Hoodie" class="img-fluid main-img">
+              <img src="/assets/yjhoodie-back.png" alt="YJ Hoodie Alternate" class="img-fluid hover-img">
+            </a>
+            <div class="desc mt-2">
+              <strong>[GGUM X DEINET] HOODIE IN BLACK</strong><br>
+              ₱6,073.84
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4" id="shirt">
+          <div class="gallery-item text-center">
+            <a href="yjcshirt.html">
+              <img src="/assets/yjcshirt.png" alt="YJ Crop Shirt" class="img-fluid main-img">
+              <img src="/assets/yjcshirt-back.png" alt="YJ Crop Shirt Alternate" class="img-fluid hover-img">
+            </a>
+            <div class="desc mt-2">
+              <strong>[GGUM X DEINET] CROP S/S T-SHIRT IN GREY</strong><br>
+              ₱1,957.54
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="review-section py-5 mt-5">
+      <div class="container">
+
+        <h2 class="text-center fw-bold mb-4">RECOGNIZED BY CULTURE MAKERS SAY</h2>
+
+        <div class="row g-4">
+
+          <!-- REVIEW 1 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="review-card p-4">
+              <div class="d-flex justify-content-between">
+                <div class="stars">★★★★★</div>
+                <small class="text-muted">2 weeks ago</small>
+              </div>
+
+              <h5 class="fw-bold mt-3">Perfect</h5>
+              <p>Please be aware the sizing is essential. My daughter is a medium but the small fits perfectly.</p>
+
+              <hr>
+
+              <div class="d-flex align-items-center gap-3">
+                <div class="profile-circle">SB</div>
+                <div>
+                  <strong>Soleil B.</strong><br>
+                  <small class="text-muted">Verified Buyer ✔</small>
+                </div>
+              </div>
+
+              <div class="helpful mt-3">
+                <small class="text-muted">Was this helpful?</small>
+                <i class="bi bi-hand-thumbs-up ms-2"></i> 74
+                <i class="bi bi-hand-thumbs-down ms-3"></i> 0
+              </div>
+            </div>
+          </div>
+
+          <!-- REVIEW 2 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="review-card p-4">
+              <div class="d-flex justify-content-between">
+                <div class="stars">★★★★★</div>
+                <small class="text-muted">2 weeks ago</small>
+              </div>
+
+              <h5 class="fw-bold mt-3">5 Stars!!!</h5>
+              <p>PRETTYYYY everything is so perfect! 10/10 it goes well with my style</p>
+
+              <hr>
+
+              <div class="d-flex align-items-center gap-3">
+                <div class="profile-circle">BG</div>
+                <div><strong>GYU ggumbassador</strong></div>
+              </div>
+
+              <div class="helpful mt-3">
+                <small class="text-muted">Was this helpful?</small>
+                <i class="bi bi-hand-thumbs-up ms-2"></i> 36
+                <i class="bi bi-hand-thumbs-down ms-3"></i> 0
+              </div>
+            </div>
+          </div>
+
+          <!-- REVIEW 3 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="review-card p-4">
+              <div class="d-flex justify-content-between">
+                <div class="stars">★★★★★</div>
+                <small class="text-muted">2 weeks ago</small>
+              </div>
+
+              <h5 class="fw-bold mt-3">So Comfy</h5>
+              <p>just received my merch!! it's so pretty and comfy. would buy again</p>
+
+              <hr>
+
+              <div class="d-flex align-items-center gap-3">
+                <div class="profile-circle">jen</div>
+                <div>
+                  <strong>jen loves 최범규˚₊· ࣪ ☆</strong><br>
+                  <small class="text-muted">Verified Buyer ✔</small>
+                </div>
+              </div>
+
+              <div class="helpful mt-3">
+                <small class="text-muted">Was this helpful?</small>
+                <i class="bi bi-hand-thumbs-up ms-2"></i> 23
+                <i class="bi bi-hand-thumbs-down ms-3"></i> 0
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <footer id="footer">
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-md-8 d-flex flex-wrap gap-5"> <!--left side sa footer-->
+            <div>
+              <h6><strong>About</strong></h6>
+              <p><a href="brand.html">Brand</a></p>
+              <p><a href="#">Contact</a></p>
+            </div>
+            <div>
+              <h6><strong>Account</strong></h6>
+              <p><a href="login.html">Login</a></p>
+              <p><a href="#">Cart</a></p>
+            </div>
+            <div>
+              <h6><strong>Support</strong></h6>
+              <p><a href="#">FAQ</a></p>
+              <p><a href="#">Notice</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-4"> <!--right side sa footer-->
+            <p><a href="#"><u>Privacy Policy</u></a> / <a href="#"><u>Terms and Conditions</u></a> /
+              <a href="#"><u>Shipping & Return</u></a>
+            </p>
+            <p><strong>㈜야운즌</strong> | CEO: <strong>YEONJUN</strong> | Business No: 207-86-03204 |</p>
+            <p>
+            <address>Address: 서울특별시 성동구 왕십리로30-12 </address>
+            </p>
+            <p>official@yawnzzn.com | +82 1551-2504 |</p>
+            <p>© 2024 YAWNZZN. All Rights Reserved. | <a href="https://www.instagram.com/yawnzzn/">Instagram</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Recommendation Modal -->
+    <div class="modal fade" id="recommendModal" tabindex="-1" aria-labelledby="recommendModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="recommendModalLabel">Suggest a Product!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="recommendForm">
+              <div class="mb-3">
+                <label for="colorInput" class="form-label">Color:</label>
+                <input type="color" id="colorInput" name="color" class="form-control form-control-color">
+              </div>
+              <div class="mb-3">
+                <label for="rangeInput" class="form-label">Love it? Rate 1–10:</label>
+                <input type="range" id="rangeInput" name="range" min="1" max="10" class="form-range">
+              </div>
+              <div class="mb-3">
+                <label for="suggestionInput" class="form-label">Your Suggestion:</label>
+                <textarea id="suggestionInput" name="suggestion" class="form-control" rows="3"
+                  placeholder="Type your suggestion here..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-pink w-100">Submit Suggestion</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const audio = document.getElementById('bgaudio');
+      const btn = document.getElementById('musicToggle');
+
+      btn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          btn.textContent = "🔊";
+        } else {
+          audio.pause();
+          btn.textContent = "🔈";
+        }
+      });
+
+      const searchToggle = document.getElementById('searchToggle');
+      const searchBar = document.getElementById('searchBar');
+
+      searchToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isHidden = searchBar.classList.contains('d-none');
+        if (isHidden) {
+          searchBar.classList.remove('d-none');
+          setTimeout(() => searchBar.classList.add('show'), 10);
+        } else {
+          searchBar.classList.remove('show');
+          setTimeout(() => searchBar.classList.add('d-none'), 300);
+        }
+      });
+
+      // optional: click outside to close
+      document.addEventListener('click', (e) => {
+        if (!searchBar.contains(e.target) && !searchToggle.contains(e.target)) {
+          searchBar.classList.remove('show');
+          setTimeout(() => searchBar.classList.add('d-none'), 300);
+        }
+      });
+
+      // Simple fade-in on scroll
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('aos-animate');
+        });
+      });
+      document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+      const form = document.getElementById('recommendForm');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const color = document.getElementById('colorInput').value;
+        const range = document.getElementById('rangeInput').value;
+        alert(`Thanks for your suggestion!`);
+        const modalEl = document.getElementById('recommendModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+        form.reset();
+      });
+    </script>
+
+</body>
+
+</html>
